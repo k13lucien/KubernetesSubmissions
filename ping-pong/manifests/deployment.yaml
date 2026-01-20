@@ -12,6 +12,25 @@ spec:
       labels:
         app: pingpong
     spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: image-claim
       containers:
         - name: pingpong
           image: k13lucien/ping-pong
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app
+
+        - name: image-response
+          image: k13lucien/reader
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app
+
+        - name: writer
+          image: k13lucien/writer
+          volumeMounts:
+            - name: shared-image
+              mountPath: /usr/src/app

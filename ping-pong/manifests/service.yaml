@@ -3,10 +3,15 @@ kind: Service
 metadata:
   name: pingpong-svc
 spec:
-  type: ClusterIP
   selector:
     app: pingpong
+  type: ClusterIP
   ports:
-    - port: 2345
+    - name: status
+      port: 8080
       protocol: TCP
       targetPort: 8080
+    - name: pingpong
+      port: 8081
+      protocol: TCP
+      targetPort: 8081
