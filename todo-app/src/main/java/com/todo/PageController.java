@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.*;
+import java.util.List;
 
 @RestController
 public class PageController {
@@ -26,7 +27,7 @@ public class PageController {
 
     @GetMapping("/")
     public ResponseEntity<String> getPage() throws IOException {
-        // 1️⃣ Check if we need a new image
+        // 1️⃣ Ensure image is cached
         boolean needNew = true;
         if (Files.exists(IMAGE_FILE) && Files.exists(META_FILE)) {
             long timestamp = Long.parseLong(Files.readString(META_FILE));
@@ -34,39 +35,69 @@ public class PageController {
                 needNew = false;
             }
         }
+        if (needNew) downloadImage();
 
-        if (needNew) {
-            downloadImage();
+        // 2️⃣ Hardcoded todos
+        List<String> todos = List.of(
+                "Finish Kubernetes practice",
+                "Push Docker image to registry",
+                "Write blog post about Spring Boot"
+        );
+
+        // 3️⃣ Build HTML
+        String html = """
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>The Project App</title>
+            <style>
+                body { text-align:center; font-family: Arial, sans-serif; }
+                #todo-list { list-style: none; padding: 0; }
+                #todo-list li { margin: 5px 0; }
+                input[type=text] { width: 300px; padding: 5px; }
+                button { padding: 5px 10px; }
+            </style>
+            <script>
+                function addTodo() {
+                    const input = document.getElementById('todo-input');
+                    if (input.value.length === 0) return alert('Please enter a todo!');
+                    if (input.value.length > 140) return alert('Todo cannot exceed 140 characters!');
+                    const li = document.createElement('li');
+                    li.textContent = input.value;
+                    document.getElementById('todo-list').appendChild(li);
+                    input.value = '';
+                }
+            </script>
+        </head>
+        <body>
+            <h1>The Project App</h1>
+            <img src="/image" alt="Random Image" style="max-width:90%; height:auto; margin:20px 0;">
+            
+            <h2>Todo List</h2>
+            <input type="text" id="todo-input" placeholder="Enter a new todo (max 140 chars)">
+            <button onclick="addTodo()">Add Todo</button>
+            
+            <ul id="todo-list">
+    """;
+
+        // 4️⃣ Add hardcoded todos
+        for (String todo : todos) {
+            html += "<li>" + todo + "</li>\n";
         }
 
-        // 2️⃣ Return HTML referencing the image endpoint
-        String html = """
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <title>The Project App</title>
-                </head>
-                <body style="text-align:center; font-family: Arial, sans-serif;">
-                    <h1>The Project App</h1>
-                    <img src="/image" alt="Random Image" style="max-width:90%%; height:auto; margin:20px 0;">
-                    <p>Devops with Kubernetes</p>
-                </body>
-                </html>
-                """;
+        html += """
+            </ul>
+            <p>Devops with Kubernetes</p>
+        </body>
+        </html>
+    """;
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_HTML);
         return new ResponseEntity<>(html, headers, HttpStatus.OK);
     }
 
-    @GetMapping("/image")
-    public ResponseEntity<byte[]> getImage() throws IOException {
-        byte[] imageBytes = Files.readAllBytes(IMAGE_FILE);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
-    }
 
     private void downloadImage() throws IOException {
         URL url = new URL("https://picsum.photos/1200");
