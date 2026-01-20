@@ -1,0 +1,5 @@
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY src/Reader.java .
+RUN javac Reader.java
+CMD ["java", "Reader"]

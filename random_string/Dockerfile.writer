@@ -1,0 +1,5 @@
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY src/Writer.java .
+RUN javac Writer.java
+CMD ["java", "Writer"]
