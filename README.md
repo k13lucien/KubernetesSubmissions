@@ -10,5 +10,5 @@
 - [1.4. The project, step 2](https://github.com/k13lucien/KubernetesSubmissions/tree/1.4)
 - [1.5. The project, step 3](https://github.com/k13lucien/KubernetesSubmissions/tree/1.5)
 - [1.6. The project, step 4](https://github.com/k13lucien/KubernetesSubmissions/tree/1.6)
-- [1.7. External access with Ingress]()
+- [1.7. External access with Ingress](https://github.com/k13lucien/KubernetesSubmissions/tree/1.7)
 - [1.8. The project, step 5](https://github.com/k13lucien/KubernetesSubmissions/tree/1.8)
