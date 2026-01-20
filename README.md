@@ -14,3 +14,4 @@
 - [1.8. The project, step 5](https://github.com/k13lucien/KubernetesSubmissions/tree/1.8)
 - [1.9. More services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.9)
 - [1.10. Even more services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.10)
+- [1.11. Persisting data](https://github.com/k13lucien/KubernetesSubmissions/tree/1.11)
