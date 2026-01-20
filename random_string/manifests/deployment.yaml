@@ -6,12 +6,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hashgenerator
+      app: random-string
   template:
     metadata:
       labels:
-        app: hashgenerator
+        app: random-string
     spec:
       containers:
-        - name: hashgenerator
+        - name: random-string
           image: k13lucien/random-string
