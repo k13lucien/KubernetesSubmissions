@@ -12,9 +12,15 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: image-cache
+          emptyDir: {}
       containers:
         - name: todo-app
           image: k13lucien/todo-app
+          volumeMounts:
+            - name: image-cache
+              mountPath: /usr/src/app/cache
           env:
             - name: PORT
               value: "9090"
