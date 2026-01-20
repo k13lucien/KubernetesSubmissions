@@ -1,6 +1,7 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -20,7 +21,18 @@ public class Reader {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             Path logPath = Path.of("/usr/src/app/log.txt");
-            String response = Files.exists(logPath) ? Files.readString(logPath) : "Log file not found.";
+            Path pingPath = Path.of("/usr/src/app/pingpong.txt");
+
+            String logContent = Files.exists(logPath)
+                    ? Files.readString(logPath).trim()
+                    : "Log file not found.";
+
+            String pingCount = Files.exists(pingPath)
+                    ? Files.readString(pingPath).trim()
+                    : "0";
+
+            String response = logContent + "\nPing / Pongs: " + pingCount + "\n";
+
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
             exchange.sendResponseHeaders(200, response.getBytes().length);
             try (OutputStream os = exchange.getResponseBody()) {
