@@ -7,11 +7,7 @@ spec:
     app: pingpong
   type: ClusterIP
   ports:
-    - name: status
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
     - name: pingpong
-      port: 8081
+      port: 2345
       protocol: TCP
       targetPort: 8081

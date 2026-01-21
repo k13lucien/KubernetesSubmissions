@@ -19,4 +19,4 @@ spec:
               service:
                 name: pingpong-svc
                 port:
-                  number: 8081
+                  number: 2345
