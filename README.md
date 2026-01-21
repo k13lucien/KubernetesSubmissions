@@ -16,3 +16,7 @@
 - [1.10. Even more services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.10)
 - [1.11. Persisting data](https://github.com/k13lucien/KubernetesSubmissions/tree/1.11)
 - [1.12. The project, step 6](https://github.com/k13lucien/KubernetesSubmissions/tree/1.12)
+
+### Chapter 2
+
+- [2.1. Connecting pods](https://github.com/k13lucien/KubernetesSubmissions/tree/2.1)
