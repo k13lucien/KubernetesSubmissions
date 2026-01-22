@@ -22,3 +22,4 @@
 - [2.1. Connecting pods](https://github.com/k13lucien/KubernetesSubmissions/tree/2.1)
 - [2.2. The project, step 8](https://github.com/k13lucien/KubernetesSubmissions/tree/2.2)
 - [2.3. Keep them separate](https://github.com/k13lucien/KubernetesSubmissions/tree/2.3)
+- [2.4. The project, step 9](https://github.com/k13lucien/KubernetesSubmissions/tree/2.4)
