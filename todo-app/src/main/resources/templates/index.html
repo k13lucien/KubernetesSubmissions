@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The Project App</title>
+    <style>
+        body { text-align:center; font-family: Arial, sans-serif; margin: 30px; }
+        #todo-list { list-style: none; padding: 0; }
+        #todo-list li { margin: 5px 0; }
+        input[type=text] { width: 300px; padding: 5px; }
+        button { padding: 5px 10px; }
+        img { border-radius: 12px; box-shadow: 0 0 8px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+<h1>The Project App</h1>
+
+<!-- The image comes from the cached /image endpoint -->
+<img src="/image" alt="Random Image" style="max-width:90%; height:auto; margin:20px 0;">
+
+<h2>Todo List</h2>
+
+<form method="post" action="/add-todo">
+    <input type="text" name="text" placeholder="Enter a new todo (max 140 chars)" maxlength="140" required>
+    <button type="submit">Add Todo</button>
+</form>
+
+<ul id="todo-list">
+    <li th:each="todo : ${todos}" th:text="${todo.text}"></li>
+</ul>
+
+<p>DevOps with Kubernetes</p>
+</body>
+</html>
