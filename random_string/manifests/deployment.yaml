@@ -13,17 +13,23 @@ spec:
       labels:
         app: images
     spec:
-      volumes: # Define volume
-        - name: shared-image
-          emptyDir: {}
       containers:
-        - name: writer
-          image: k13lucien/writer
-          volumeMounts: # Mount volume
-            - name: shared-image
-              mountPath: /usr/src/app
         - name: reader
           image: k13lucien/reader
-          volumeMounts: # Mount volume
-            - name: shared-image
-              mountPath: /usr/src/app
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/src/app/config
+      volumes:
+        - name: config-volume
+          configMap:
+            name: log-output-config
+            items:
+              - key: information.txt
+                path: information.txt
+

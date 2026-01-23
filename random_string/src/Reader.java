@@ -30,13 +30,26 @@ public class Reader {
     static class LogHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            String timestamp = Instant.now().toString();
+            // Read configmap data
+            String message = System.getenv("MESSAGE");
+            Path infoPath = Path.of("/usr/src/app/config/information.txt");
+            String fileContent = Files.exists(infoPath)
+                    ? Files.readString(infoPath).trim()
+                    : "File not found";
+
+            // Fetch ping count
             String pingCount = fetchPingCount();
 
-            String response = String.format(
-                    "%s: %s\nPing / Pongs: %s\n",
-                    timestamp, RANDOM_ID, pingCount
-            );
+            // Generate timestamp
+            String timestamp = Instant.now().toString();
+
+            // Build response
+            String response = String.format("""
+                    file content: %s
+                    env variable: MESSAGE=%s
+                    %s: %s
+                    Ping / Pongs: %s
+                    """, fileContent, message, timestamp, RANDOM_ID, pingCount);
 
             exchange.getResponseHeaders().set("Content-Type", "text/plain");
             exchange.sendResponseHeaders(200, response.getBytes().length);
