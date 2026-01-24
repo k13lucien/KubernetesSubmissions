@@ -22,3 +22,9 @@ spec:
           volumeMounts:
             - name: image-cache
               mountPath: /usr/src/app/cache
+          envFrom:
+            - configMapRef:
+                name: todo-config
+          env:
+            - name: PORT
+              value: "8080"

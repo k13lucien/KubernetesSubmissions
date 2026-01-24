@@ -16,3 +16,6 @@ spec:
       containers:
         - name: todo-backend
           image: k13lucien/todo-backend
+          env:
+            - name: PORT
+              value: "8080"
