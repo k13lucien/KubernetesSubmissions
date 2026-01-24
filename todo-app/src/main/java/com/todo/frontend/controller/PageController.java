@@ -1,5 +1,6 @@
 package com.todo.frontend.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,17 @@ public class PageController {
     private static final Path CACHE_DIR = Paths.get("/usr/src/app/cache");
     private static final Path IMAGE_FILE = CACHE_DIR.resolve("image.jpg");
     private static final Path META_FILE = CACHE_DIR.resolve("timestamp.txt");
-    private static final long CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String backendUrl = "http://todo-backend-svc:2345/todos"; // internal DNS name
+
+    @Value("${BACKEND_URL}")
+    private String backendUrl;
+
+    @Value("${IMAGE_URL:https://picsum.photos/1200}")
+    private String imageUrl;
+
+    @Value("${CACHE_DURATION:600000}") // default 10 min
+    private long cacheDuration;
 
     public PageController() throws IOException {
         Files.createDirectories(CACHE_DIR);
@@ -29,10 +37,8 @@ public class PageController {
 
     @GetMapping("/")
     public String getPage(Model model) throws IOException {
-        // ✅ Cache image if needed
         ensureCachedImage();
 
-        // ✅ Fetch todos from backend (inside the cluster)
         List<Map<String, Object>> todos = List.of();
         try {
             List<Map<String, Object>> response = restTemplate.getForObject(backendUrl, List.class);
@@ -42,7 +48,7 @@ public class PageController {
         }
 
         model.addAttribute("todos", todos);
-        return "index"; // resolves to templates/index.html
+        return "index";
     }
 
     @PostMapping("/add-todo")
@@ -68,7 +74,7 @@ public class PageController {
         boolean needNew = true;
         if (Files.exists(IMAGE_FILE) && Files.exists(META_FILE)) {
             long timestamp = Long.parseLong(Files.readString(META_FILE));
-            if (System.currentTimeMillis() - timestamp < CACHE_DURATION) {
+            if (System.currentTimeMillis() - timestamp < cacheDuration) {
                 needNew = false;
             }
         }
@@ -76,7 +82,7 @@ public class PageController {
     }
 
     private void downloadImage() throws IOException {
-        URL url = new URL("https://picsum.photos/1200");
+        URL url = new URL(imageUrl);
         try (InputStream in = url.openStream()) {
             Files.copy(in, IMAGE_FILE, StandardCopyOption.REPLACE_EXISTING);
         }
