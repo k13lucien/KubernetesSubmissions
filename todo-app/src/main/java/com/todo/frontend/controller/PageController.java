@@ -37,14 +37,16 @@ public class PageController {
 
     @GetMapping("/")
     public String getPage(Model model) throws IOException {
+        // Ensure cached image
         ensureCachedImage();
 
+        // Fetch todos from backend
         List<Map<String, Object>> todos = List.of();
         try {
             List<Map<String, Object>> response = restTemplate.getForObject(backendUrl, List.class);
             if (response != null) todos = response;
         } catch (Exception e) {
-            System.err.println("Failed to fetch todos: " + e.getMessage());
+            System.err.println("⚠️ Failed to fetch todos: " + e.getMessage());
         }
 
         model.addAttribute("todos", todos);
@@ -57,7 +59,7 @@ public class PageController {
             try {
                 restTemplate.postForObject(backendUrl, Map.of("text", text), String.class);
             } catch (Exception e) {
-                System.err.println("Failed to add todo: " + e.getMessage());
+                System.err.println("⚠️ Failed to add todo: " + e.getMessage());
             }
         }
         return "redirect:/";
