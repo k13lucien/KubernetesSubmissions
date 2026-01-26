@@ -16,3 +16,12 @@ spec:
       containers:
         - name: pingpong
           image: k13lucien/ping-pong
+          env:
+            - name: PORT
+              value: "8081"
+            - name: DB_URL
+              value: "jdbc:postgresql://pingpong-db-svc:5432/pingpong"
+            - name: DB_USER
+              value: "ppuser"
+            - name: DB_PASSWORD
+              value: "pppassword"
