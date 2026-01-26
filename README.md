@@ -26,3 +26,4 @@
 - [2.5. The project, step 10](https://github.com/k13lucien/KubernetesSubmissions/tree/2.5)
 - [2.6. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.6)
 - [2.7. Stateful applications](https://github.com/k13lucien/KubernetesSubmissions/tree/2.7)
+- [2.8. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.8)
