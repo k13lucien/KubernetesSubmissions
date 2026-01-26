@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: todo-db-secret
+  namespace: project
+type: Opaque
+stringData:
+  POSTGRES_USER: todouser
+  POSTGRES_PASSWORD: todopassword
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-db-config
+  namespace: project
+data:
+  POSTGRES_DB: tododb
+  POSTGRES_HOST: todo-db-svc
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: todo-db
+  namespace: project
+spec:
+  serviceName: "todo-db-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-db
+  template:
+    metadata:
+      labels:
+        app: todo-db
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: todo-db-secret
+            - configMapRef:
+                name: todo-db-config
+          volumeMounts:
+            - name: todo-db-data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: todo-db-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-db-svc
+  namespace: project
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+  selector:
+    app: todo-db
