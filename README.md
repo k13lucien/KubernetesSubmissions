@@ -29,3 +29,22 @@
 - [2.8. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.8)
 - [2.9. The project, step 12](https://github.com/k13lucien/KubernetesSubmissions/tree/2.9)
 - [2.10. The project, step 13](https://github.com/k13lucien/KubernetesSubmissions/tree/2.10)
+
+### Chapter 3
+
+##
+-[3.9 DBaaS vs DIY]
+||DBaaS|DIY|
+|----|----|---|
+|Pros|Easy setup: Just a few clicks or a single command to create a database|Full control: Customize configuration, tuning, and security as needed|
+||Automatic maintenance: Updates, patches, and security handled by the provider|Lower cost: Only pay for the compute and storage you use|
+||Integrated backups: Built-in automatic snapshots and restore options|Local integration: Perfect for local clusters (like Minikube/K3d)|
+||High availability: Multi-zone replication, failover, and monitoring out of the box|Offline operation: Can work without internet connectivity|
+||Scalability: Vertical or horizontal scaling without manual configuration|  |
+||||
+|Cons|Cost: More expensive over time compared to self-hosted solutions|Manual setup: Requires knowledge to install, configure, and secure|
+||Limited control: Restricted access to server configs, logs, and tuning|Maintenance overhead: You handle updates, scaling, and monitoring|
+||Vendor lock-in: Migrating between providers can be complex|Backup complexity: You must script or automate your own backups|
+|||Risk of downtime: No automatic failover or SLA unless you configure it|
+|||Security management: Patching vulnerabilities is your responsibility|
+##
