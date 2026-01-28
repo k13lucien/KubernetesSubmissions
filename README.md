@@ -33,7 +33,7 @@
 ### Chapter 3
 
 ##
--[3.9 DBaaS vs DIY]
+-[3.9 DBaaS vs DIY](https://github.com/k13lucien/KubernetesSubmissions/tree/3.9)
 ||DBaaS|DIY|
 |----|----|---|
 |Pros|Easy setup: Just a few clicks or a single command to create a database|Full control: Customize configuration, tuning, and security as needed|
