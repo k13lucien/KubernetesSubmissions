@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: pingpong-rollout
+  namespace: exercises
+spec:
+  replicas: 1
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - pause: { duration: 2m }
+        - analysis:
+            templates:
+              - templateName: pingpong-cpu-check
+        - setWeight: 100
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      containers:
+        - name: pingpong
+          image: k13lucien/ping-pong
+          ports:
+            - containerPort: 8081
+          env:
+            - name: PORT
+              value: "8081"
+            - name: DB_URL
+              value: "jdbc:postgresql://pingpong-db-svc:5432/pingpong"
+            - name: DB_USER
+              value: "ppuser"
+            - name: DB_PASSWORD
+              value: "pppassword"
