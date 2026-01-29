@@ -23,7 +23,9 @@ public class Reader {
         int port = Integer.parseInt(System.getenv().getOrDefault("PORT", "8080"));
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new LogHandler());
+        server.createContext("/healthz", new HealthHandler());
         server.start();
+        System.out.println("Health server started on port " + port);
         System.out.println("Reader started on port " + port);
     }
 
@@ -71,4 +73,34 @@ public class Reader {
             }
         }
     }
+
+    static class HealthHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange exchange) throws IOException {
+        if (!"GET".equals(exchange.getRequestMethod())) {
+            exchange.sendResponseHeaders(405, -1);
+            return;
+        }
+
+        String pingpongUrl = System.getenv().getOrDefault("PINGPONG_URL", "http://pingpong-svc:2345/pings");
+        String response = "ok";
+        int status = 200;
+
+        try {
+            HttpURLConnection conn = (HttpURLConnection) new URL(pingpongUrl).openConnection();
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(2000);
+            conn.getResponseCode();
+        } catch (IOException e) {
+            status = 500;
+            response = "cannot reach pingpong: " + e.getMessage();
+        }
+
+        exchange.sendResponseHeaders(status, response.getBytes().length);
+        try (OutputStream os = exchange.getResponseBody()) {
+            os.write(response.getBytes());
+        }
+    }
+}
+
 }
