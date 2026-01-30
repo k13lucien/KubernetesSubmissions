@@ -4,36 +4,37 @@
 
 ### Chapter 1
 
-- [1.1. Getting started](https://github.com/k13lucien/KubernetesSubmissions/tree/main/random_string)
-- [1.2. The project, step 1](https://github.com/k13lucien/KubernetesSubmissions/tree/1.2)
-- [1.3. Declarative approach](https://github.com/k13lucien/KubernetesSubmissions/tree/1.3)
-- [1.4. The project, step 2](https://github.com/k13lucien/KubernetesSubmissions/tree/1.4)
-- [1.5. The project, step 3](https://github.com/k13lucien/KubernetesSubmissions/tree/1.5)
-- [1.6. The project, step 4](https://github.com/k13lucien/KubernetesSubmissions/tree/1.6)
-- [1.7. External access with Ingress](https://github.com/k13lucien/KubernetesSubmissions/tree/1.7)
-- [1.8. The project, step 5](https://github.com/k13lucien/KubernetesSubmissions/tree/1.8)
-- [1.9. More services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.9)
-- [1.10. Even more services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.10)
+- [1.1. Getting started](https://github.com/k13lucien/KubernetesSubmissions/tree/1.1/random_string)
+- [1.2. The project, step 1](https://github.com/k13lucien/KubernetesSubmissions/tree/1.2/todo-app)
+- [1.3. Declarative approach](https://github.com/k13lucien/KubernetesSubmissions/blob/1.3/random_string/manifests/deployment.yaml)
+- [1.4. The project, step 2](https://github.com/k13lucien/KubernetesSubmissions/blob/1.4/todo-app/manifests/deployment.yaml)
+- [1.5. The project, step 3](https://github.com/k13lucien/KubernetesSubmissions/tree/1.5/todo-app/src/main/java/com/todo)
+- [1.6. The project, step 4](https://github.com/k13lucien/KubernetesSubmissions/blob/1.6/todo-app/manifests/service.yaml)
+- [1.7. External access with Ingress](https://github.com/k13lucien/KubernetesSubmissions/tree/1.7/random_string/manifests)
+- [1.8. The project, step 5](https://github.com/k13lucien/KubernetesSubmissions/tree/1.8/todo-app/manifests)
+- [1.9. More services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.9/ping-pong)
+- [1.10. Even more services](https://github.com/k13lucien/KubernetesSubmissions/tree/1.10/random_string)
 - [1.11. Persisting data](https://github.com/k13lucien/KubernetesSubmissions/tree/1.11)
-- [1.12. The project, step 6](https://github.com/k13lucien/KubernetesSubmissions/tree/1.12)
+- [1.12. The project, step 6](https://github.com/k13lucien/KubernetesSubmissions/tree/1.12/todo-app)
+- [1.13. The project, step 7](https://github.com/k13lucien/KubernetesSubmissions/tree/1.13/todo-app/src/main/java/com/todo)
 
 ### Chapter 2
 
 - [2.1. Connecting pods](https://github.com/k13lucien/KubernetesSubmissions/tree/2.1)
-- [2.2. The project, step 8](https://github.com/k13lucien/KubernetesSubmissions/tree/2.2)
+- [2.2. The project, step 8](https://github.com/k13lucien/KubernetesSubmissions/tree/2.2/todo-app)
 - [2.3. Keep them separate](https://github.com/k13lucien/KubernetesSubmissions/tree/2.3)
-- [2.4. The project, step 9](https://github.com/k13lucien/KubernetesSubmissions/tree/2.4)
-- [2.5. The project, step 10](https://github.com/k13lucien/KubernetesSubmissions/tree/2.5)
-- [2.6. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.6)
-- [2.7. Stateful applications](https://github.com/k13lucien/KubernetesSubmissions/tree/2.7)
-- [2.8. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.8)
-- [2.9. The project, step 12](https://github.com/k13lucien/KubernetesSubmissions/tree/2.9)
-- [2.10. The project, step 13](https://github.com/k13lucien/KubernetesSubmissions/tree/2.10)
+- [2.4. The project, step 9](https://github.com/k13lucien/KubernetesSubmissions/tree/2.4/todo-app/manifests)
+- [2.5. Documentation and ConfigMaps](https://github.com/k13lucien/KubernetesSubmissions/tree/2.5/random_string)
+- [2.6. The project, step 10](https://github.com/k13lucien/KubernetesSubmissions/tree/2.6/todo-app)
+- [2.7. Stateful applications](https://github.com/k13lucien/KubernetesSubmissions/tree/2.7/ping-pong)
+- [2.8. The project, step 11](https://github.com/k13lucien/KubernetesSubmissions/tree/2.8/todo-app)
+- [2.9. The project, step 12](https://github.com/k13lucien/KubernetesSubmissions/tree/2.9/todo-app)
+- [2.10. The project, step 13](https://github.com/k13lucien/KubernetesSubmissions/tree/2.10/todo-app)
 
 ### Chapter 3
 
 ##
--[3.9 DBaaS vs DIY](https://github.com/k13lucien/KubernetesSubmissions/tree/3.9)
+-[3.9 DBaaS vs DIY](https://github.com/k13lucien/KubernetesSubmissions/blob/3.9/README.md)
 ||DBaaS|DIY|
 |----|----|---|
 |Pros|Easy setup: Just a few clicks or a single command to create a database|Full control: Customize configuration, tuning, and security as needed|
@@ -48,3 +49,9 @@
 |||Risk of downtime: No automatic failover or SLA unless you configure it|
 |||Security management: Patching vulnerabilities is your responsibility|
 ##
+
+### Chapter 4
+- [4.1. Readines probe](https://github.com/k13lucien/KubernetesSubmissions/tree/4.1)
+- [4.2. The project, step 21](https://github.com/k13lucien/KubernetesSubmissions/tree/4.2/todo-app)
+- [4.3. Prometheus](https://github.com/k13lucien/KubernetesSubmissions/tree/4.3/todo-app)
+- [4.4. Your canary](https://github.com/k13lucien/KubernetesSubmissions/tree/4.4/ping-pong/manifests)
